@@ -34,34 +34,34 @@ void test1() {
     Guest juan("Juan", "312-741-9856");
     Guest oscar("oscar", "325-895-412");
 
-    houston.reserveRoom(1, jorge);
-    houston.reserveRoom(4, maria);
-    houston.reserveRoom(7, luis);
-    houston.reserveAnyRoom(juan);
+    houston.reserveRoom(1, jorge, 5);
+    houston.reserveRoom(4, maria, 10);
+    houston.reserveRoom(7, luis, 4);
+    houston.reserveAnyRoom(juan, 8);
     houston.info();
     houston.freeRoom(1);
     houston.freeRoom(4);
     houston.info();
-    houston.reserveRoom(1, oscar);
+    houston.reserveRoom(1, oscar, 2);
     houston.info();
 }
 
 void test2(){
     showCommands();
-    int id;
+    int id,  nNights;
     Guest myGuest;
     Hotel hotel( "Houston", "Near the park", "154616546516" );
     std::string name, phoneNumber, comand;
     std::cin >> comand;
     while ( comand != "exit" ){
         if ( comand == "reserveRoom" ){
-            std::cin >> id >> name >> phoneNumber;
+            std::cin >> id >> name >> phoneNumber >> nNights;
             myGuest = Guest( name, phoneNumber );
-            hotel.reserveRoom( id, myGuest );
+            hotel.reserveRoom( id, myGuest , nNights);
         } else if ( comand == "reserveAnyRoom" ){
             std::cin >> name >> phoneNumber;
             myGuest = Guest( name, phoneNumber );
-            hotel.reserveAnyRoom( myGuest );
+            hotel.reserveAnyRoom( myGuest, nNights );
         } else if ( comand == "freeRoom" ){
             std::cin >> id;
             hotel.freeRoom( id );

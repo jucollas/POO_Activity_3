@@ -29,7 +29,7 @@ public:
     bool isAvailable();
     bool freeRoom();
     void info();
-    bool reserve( Guest &guest);
+    bool reserve( Guest &guest, int nNight);
 };
 
 #endif

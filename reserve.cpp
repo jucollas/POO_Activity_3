@@ -1,7 +1,7 @@
 #include "reserve.h"
 
-Reserve::Reserve(int id, const Guest& guest, const Room& room)
-        : id(id), guestRef(guest), roomRef(room), status("Enabled") {
+Reserve::Reserve(int id, Guest& guest, Room& room)
+        : id(id), guestRef(&guest), roomRef(&room), status("Enabled") {
         // ...
     }
 
@@ -9,11 +9,11 @@ int Reserve::getId(){
     return this->id;
 };
 
-Guest Reserve::getGuest(){
+Guest* Reserve::getGuest(){
     return guestRef;
 }
 
-Room Reserve::getRoom(){
+Room* Reserve::getRoom(){
     return roomRef;
 }
 string Reserve::getStatus(){

@@ -14,9 +14,9 @@ Room::Room(const int& id, const int& cost){
 }
 
 
-bool Room::reserve( Guest &guest){
+bool Room::reserve( Guest &guest, int nNight){
     bool ans = false;
-    if (guest.getCash() >= this->getCost() && this->isAvailable()){
+    if (guest.getCash() >= this->getCost() * nNight && this->isAvailable()){
         ans = true;
         this->available = false;
     }

@@ -33,32 +33,36 @@ int Hotel::getAvailableRooms(){
     return this->availableRooms;
 }
 
-bool Hotel::reserveRoom(int roomId, Guest &client /*Metodo de pago..ect*/){
+bool Hotel::reserveRoom(int roomId, Guest &client, int nNights){
     bool ans = false;
-    if(rooms[roomId].isAvailable() && client.getCash() >= rooms[roomId].getCost() ){
-        ans = true;
+    if(rooms[roomId].reserve(client, nNights)){
         reserves.push_back(Reserve( reserves.size() + 1, client, rooms[roomId]));
+        Payment payment(reserves[reserves.size() - 1], rooms[roomId].getCost(), nNights);
         client.pay(rooms[roomId].getCost());
-        rooms[roomId].reserve();
         --availableRooms;
-    }
+    }else
+        cout << "It is NOT possible to reserve the room" << endl;
     return ans;
 }
 
-/*bool Hotel::reserveAnyRoom(Guest& client ){
+bool Hotel::reserveAnyRoom(Guest& client, int nNights ){
     int index = 0;
     bool reserved = false;
     if(this->getAvailableRooms() != 0){
         while (!reserved && index < (this->rooms).size() ) {
-            reserved = 
+            if(rooms[index].reserve(client, nNights)){
+                reserves.push_back(Reserve( reserves.size() + 1, client, rooms[index]));
+                Payment payment(reserves[reserves.size() - 1], rooms[index].getCost(), nNights);
+                client.pay(rooms[index].getCost());
+                --availableRooms;
+                reserved = true;
+            }
             ++index;
         }
-        if(reserved)
-            --availableRooms;
     }else
         cout << "It is NOT possible to reserve any room" << endl;
     return reserved;
-}*/
+}
 
 bool Hotel::freeRoom(int roomId ){
     return (this->rooms)[roomId].freeRoom();

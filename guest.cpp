@@ -9,7 +9,7 @@
 Guest::Guest(const string& name, const string& phoneNumber){
     random_device rd;
     mt19937 mt(rd());
-    uniform_int_distribution<int> dist(500, 1000);
+    uniform_int_distribution<int> dist(10000, 80000);
     this->name = name;
     this->phoneNumber = phoneNumber;
     this->cash = dist(mt);

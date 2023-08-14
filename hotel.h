@@ -15,6 +15,7 @@
 #include "room.h"
 #include "guest.h"
 #include "reserve.h"
+#include "Payment.h"
 //#include "test.cpp"
 
 #define NRooms 10
@@ -43,8 +44,8 @@ public:
     /*
      * metodos
      */
-    bool reserveRoom( int roomId, Guest &client );
-    bool reserveAnyRoom( Guest &client );
+    bool reserveRoom( int roomId, Guest &client, int nNights);
+    bool reserveAnyRoom( Guest &client, int nNights );
     bool freeRoom( int roomId );
     void viewAllReserve();
     void info();

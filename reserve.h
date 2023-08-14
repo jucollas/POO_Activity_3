@@ -11,15 +11,15 @@ using namespace std;
 class Reserve {
 private:
     int id;
-    const Guest& guestRef;
-    const Room& roomRef;
+    Guest* guestRef;
+    Room* roomRef;
     string status;
 
 public:
-    Reserve(int id, const Guest& guest, const Room& room);
+    Reserve(int id, Guest& guest, Room& room);
     int getId();
-    Guest getGuest();
-    Room getRoom();
+    Guest* getGuest();
+    Room* getRoom();
     string getStatus();
     /*
      * metodos
