@@ -1,6 +1,6 @@
 #include "payment.h"
 
-Payment::Payment(const Reserve& reserve, int costNight, int nNight): reserve(reserve),nNight(nNight), amount(nNight * costNight){
+Payment::Payment(int costNight, int nNight): nNight(nNight), amount(nNight * costNight){
 
 };
 
@@ -10,8 +10,4 @@ int Payment::getAmount(){
 
 int Payment::getNNight(){
     return nNight;
-}
-
-Reserve Payment::getReserve(){
-    return reserve;
 }

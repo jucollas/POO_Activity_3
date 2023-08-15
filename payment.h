@@ -3,27 +3,23 @@
  * Fecha: 5/08/2023
  * Clase Guest
  */
-
-#ifndef PAYMENT_H
-#define PAYMENT_H
-
 #include <string>
 #include <iostream>
 #include <random>
-#include "reserve.h"
+
+#ifndef PAYMENT_H
+#define PAYMENT_H
 
 using namespace std;
 
 class Payment{
 private:
     int amount;
-    int nNight; 
-    const Reserve& reserve;
+    int nNight;
 public:
-    Payment(const Reserve& reserve, int costNight, int nNight);
+    Payment(int costNight, int nNight);
     int getAmount();
     int getNNight();
-    Reserve getReserve();
 };
 
 #endif

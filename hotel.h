@@ -48,6 +48,8 @@ public:
     bool reserveAnyRoom( Guest &client, int nNights );
     bool freeRoom( int roomId );
     void viewAllReserve();
+    void infoReserves();
+    void infoSpecificReserve(int i);
     void info();
 
 };

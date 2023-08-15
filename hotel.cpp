@@ -36,8 +36,8 @@ int Hotel::getAvailableRooms(){
 bool Hotel::reserveRoom(int roomId, Guest &client, int nNights){
     bool ans = false;
     if(rooms[roomId].reserve(client, nNights)){
-        reserves.push_back(Reserve( reserves.size() + 1, client, rooms[roomId]));
-        Payment payment(reserves[reserves.size() - 1], rooms[roomId].getCost(), nNights);
+        Payment *payment = new Payment(rooms[roomId].getCost(), nNights);
+        reserves.push_back(Reserve( reserves.size() + 1, client, rooms[roomId], *payment));
         client.pay(rooms[roomId].getCost());
         --availableRooms;
     }else
@@ -51,8 +51,8 @@ bool Hotel::reserveAnyRoom(Guest& client, int nNights ){
     if(this->getAvailableRooms() != 0){
         while (!reserved && index < (this->rooms).size() ) {
             if(rooms[index].reserve(client, nNights)){
-                reserves.push_back(Reserve( reserves.size() + 1, client, rooms[index]));
-                Payment payment(reserves[reserves.size() - 1], rooms[index].getCost(), nNights);
+                Payment *payment = new Payment(rooms[index].getCost(), nNights);
+                reserves.push_back(Reserve( reserves.size() + 1, client, rooms[index], *payment));
                 client.pay(rooms[index].getCost());
                 --availableRooms;
                 reserved = true;
@@ -66,6 +66,18 @@ bool Hotel::reserveAnyRoom(Guest& client, int nNights ){
 
 bool Hotel::freeRoom(int roomId ){
     return (this->rooms)[roomId].freeRoom();
+}
+
+void Hotel::infoReserves(){
+    cout << "***********************************"<< endl;
+    cout << "Reserves information" << endl;
+    cout << this->reserves.size() << endl;
+    for(int i = 0; i < this->reserves.size(); ++i)
+        this->reserves[i].infoSimple();
+}
+
+void Hotel::infoSpecificReserve(int i){
+    this->reserves[i].infoComplete();
 }
 
 void Hotel::info(){

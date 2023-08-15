@@ -9,20 +9,22 @@
 #include "room.h"
 #include <string>
 
+using namespace std;
+
 void test1();
 void test2();
 void showCommands();
 
 int main(){
     int a;
-    std::cout << "type '1' for test 1 and '2' for test 2" << std::endl << "> ";
-    std::cin >> a;
+    cout << "type '1' for test 1 and '2' for test 2" << endl << "> ";
+    cin >> a;
     if ( a == 1 ){
         test1();
     } else if ( a == 2 ){
         test2();
     } else {
-        std::cout << "?" << std::endl;
+        cout << "?" << endl;
     }
 }
 
@@ -51,36 +53,45 @@ void test2(){
     int id,  nNights;
     Guest myGuest;
     Hotel hotel( "Houston", "Near the park", "154616546516" );
-    std::string name, phoneNumber, comand;
-    std::cin >> comand;
+    string name, phoneNumber, comand;
+    cin >> comand;
     while ( comand != "exit" ){
+        system("cls");
         if ( comand == "reserveRoom" ){
-            std::cin >> id >> name >> phoneNumber >> nNights;
+            cin >> id >> name >> phoneNumber >> nNights;
             myGuest = Guest( name, phoneNumber );
             hotel.reserveRoom( id, myGuest , nNights);
         } else if ( comand == "reserveAnyRoom" ){
-            std::cin >> name >> phoneNumber;
+            cin >> name >> phoneNumber;
             myGuest = Guest( name, phoneNumber );
             hotel.reserveAnyRoom( myGuest, nNights );
         } else if ( comand == "freeRoom" ){
-            std::cin >> id;
+            cin >> id;
             hotel.freeRoom( id );
-        } else if ( comand == "info" ){
+        } else if( comand == "infoSpecificReserve"){
+            cin >> id;
+            hotel.infoSpecificReserve(id);
+        }else if ( comand == "infoRooms" ){
             hotel.info();
-        } else if ( comand == "help" ){
+        } else if( comand == "infoReserves"){
+            hotel.infoReserves();
+        }else if ( comand == "help" ){
             showCommands();
         } else {
-            std::cout << "The command wasn't understood" << std::endl ;
+            cout << "The command wasn't understood" << endl ;
         }
-        std::cin >> comand;
+        cin >> comand;
     }
 }
 
 void showCommands(){
-    std::cout << "Good day\n->_<-\nThe available commands are:\n'exit' | to exit\n";
-    std::cout << "'reserveRoom' + roomId + clientName + clientPhone | to reserve a particular room\n";
-    std::cout << "'reserveAnyRoom' + clientName + clientPhone | to reserve any room in the hotel\n";
-    std::cout << "'info' | to get all the information related to the Hotel\n";
-    std::cout << "'help' | to show this again\n";
+    cout << "Good day\n->_<-\nThe available commands are:\n'exit' | to exit\n";
+    cout << "'reserveRoom' + roomId + clientName + clientPhone | to reserve a particular room\n";
+    cout << "'reserveAnyRoom' + clientName + clientPhone | to reserve any room in the hotel\n";
+    cout << "'infoSpecificReserve' + 'idReserver' | to get all the information related to the specific reserve\n";
+    cout << "'freeRoom' + 'idReserver' | \n";
+    cout << "'infoReserves'        | to get all the information related to the Reserves\n";
+    cout << "'infoRooms'           | to get all the information related to the Hotel and Rooms\n";
+    cout << "'help'                | to show this again\n";
 
 }
